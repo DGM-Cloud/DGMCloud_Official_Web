@@ -5,9 +5,13 @@ import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion
 import BlurText from '@/components/blur-text';
 import { useTranslations } from '@/lib/i18n/locale-context';
 
-/** En móvil el scroll-linked opacity/translate del hero fuerza recomposición sobre el WebGL fijo y parpadea al abandonar el fold. */
-function useMobileHeroViewport() {
-  const [narrow, setNarrow] = useState(false);
+/**
+ * Hasta conocer viewport (primer frame `null`), NO marcamos ancho escritorio —
+ * así no aplicamos opacity/y/scale ligados al scroll en móvil; si están activos antes
+ * de que useScroll lleve valores estables en Safari/WebKit el hero queda opacity≈0.
+ */
+function useNarrowViewportAfterMount(): boolean | null {
+  const [narrow, setNarrow] = useState<boolean | null>(null);
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)');
     const sync = () => setNarrow(mq.matches);
@@ -31,13 +35,18 @@ export function Hero() {
   const { t } = useTranslations();
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
-  const narrowMobile = useMobileHeroViewport();
+  const narrowState = useNarrowViewportAfterMount();
 
-  /* Parallax: hero fades + shrink al hacer scroll — desactivado en móvil (ver hook). */
+  /* Parallax: hero fades + shrink al hacer scroll — solo escritorio estable (narrowState === false). */
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
   const heroOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
   const heroY = useTransform(scrollYProgress, [0, 0.55], ['0%', '-8%']);
   const heroScale = useTransform(scrollYProgress, [0, 0.55], [1, 0.96]);
+
+  const scrollLinkedFx =
+    !reduceMotion && narrowState === false
+      ? { opacity: heroOpacity, y: heroY, scale: heroScale }
+      : undefined;
 
   return (
     <section
@@ -50,11 +59,7 @@ export function Hero() {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        style={
-          reduceMotion || narrowMobile
-            ? undefined
-            : { opacity: heroOpacity, y: heroY, scale: heroScale }
-        }
+        style={scrollLinkedFx}
       >
         {/* Eyebrow */}
         <div className="mb-4 text-center md:mb-8">

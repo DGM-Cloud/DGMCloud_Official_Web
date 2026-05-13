@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useReducedMotion, type Transition } from 'framer-motion';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 type BlurTextTag = 'h1' | 'h2' | 'h3' | 'p' | 'span';
 
@@ -85,6 +85,24 @@ export default function BlurText({
   useEffect(() => {
     if (reduceMotion) setInView(true);
   }, [reduceMotion]);
+
+  /** WebKit a veces no dispara IO en primera pintura sobre capas/fixes — comprobamos layout. */
+  useLayoutEffect(() => {
+    if (reduceMotion || inView) return;
+    const peek = () => {
+      const el = ref.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      const vh = typeof window !== 'undefined' ? window.innerHeight : 1;
+      if (r.height < 2) return;
+      if (r.top < vh * 1.05 && r.bottom > vh * 0.06) setInView(true);
+    };
+    peek();
+    const rid = typeof requestAnimationFrame !== 'undefined' ? requestAnimationFrame(peek) : 0;
+    return () => {
+      if (rid) cancelAnimationFrame(rid);
+    };
+  }, [reduceMotion, inView, text]);
 
   const defaultFrom = useMemo(
     () =>
