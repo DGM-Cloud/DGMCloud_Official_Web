@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import BlurText from '@/components/blur-text';
 import { GlassSurface } from '@/components/ui/glass-surface';
 import { useTranslations } from '@/lib/i18n/locale-context';
@@ -118,9 +119,17 @@ export function FeaturesSection() {
         >
           <a
             href="#contact"
-            className="btn-shimmer inline-flex items-center gap-2.5 bg-primary px-7 py-3 text-sm font-semibold tracking-wide text-primary-foreground"
+            className="btn-shimmer group relative inline-flex min-h-[2.875rem] shrink-0 items-center gap-2 rounded-full border border-white/18 bg-primary px-7 py-2.5 text-sm font-semibold tracking-[0.04em] text-primary-foreground shadow-[0_8px_32px_-6px_rgba(0,115,252,0.5),inset_0_1px_0_rgba(255,255,255,0.2)] transition-[transform] duration-300 hover:-translate-y-px md:px-8"
           >
-            {t('features.cta')} →
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-x-4 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-white/48 to-transparent"
+            />
+            <span>{t('features.cta')}</span>
+            <ArrowUpRight
+              aria-hidden
+              className="size-[1rem] shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
           <p className="text-sm text-muted-foreground">
             {t('features.ctaHint')}

@@ -8,7 +8,7 @@ export const dictionaries = {
       services: 'Services',
       portfolio: 'Portfolio',
       about: 'About',
-      cta: 'Get in Touch',
+      cta: 'Contact us',
       menu: 'Menu',
       langEn: 'EN',
       langEs: 'ES',
@@ -18,8 +18,8 @@ export const dictionaries = {
       eyebrow: 'Elite Software Engineering Firm',
       subtitle:
         'Precision engineering meets architectural elegance. We build systems that don\'t just work—they perform.',
-      ctaPrimary: 'Start Project',
-      ctaSecondary: 'View Work',
+      ctaPrimary: 'Contact us',
+      ctaSecondary: 'Our clients',
     },
     techSpecs: {
       s1: 'High-Performance .NET Cores',
@@ -49,8 +49,8 @@ export const dictionaries = {
     features: {
       kicker: 'Why Choose DGM Cloud',
       title: 'Engineering Philosophy',
-      cta: 'Start Your Project',
-      ctaHint: 'Ready to experience the difference?',
+      cta: 'Contact us',
+      ctaHint: 'Tell us what you need — no obligation. We reply fast.',
       f1: {
         title: 'Precision Engineering',
         subtitle: 'Apple-level attention to detail',
@@ -151,7 +151,7 @@ export const dictionaries = {
       services: 'Servicios',
       portfolio: 'Portafolio',
       about: 'Nosotros',
-      cta: 'Contactar',
+      cta: 'Contáctanos',
       menu: 'Menú',
       langEn: 'EN',
       langEs: 'ES',
@@ -161,8 +161,8 @@ export const dictionaries = {
       eyebrow: 'Firma de ingeniería de software de élite',
       subtitle:
         'Ingeniería de precisión con elegancia arquitectónica. Construimos sistemas que no solo funcionan: rinden.',
-      ctaPrimary: 'Iniciar proyecto',
-      ctaSecondary: 'Ver trabajo',
+      ctaPrimary: 'Contáctanos',
+      ctaSecondary: 'Nuestros clientes',
     },
     techSpecs: {
       s1: 'Núcleos .NET de alto rendimiento',
@@ -192,8 +192,8 @@ export const dictionaries = {
     features: {
       kicker: 'Por qué DGM Cloud',
       title: 'Filosofía de ingeniería',
-      cta: 'Empezar tu proyecto',
-      ctaHint: '¿Listo para notar la diferencia?',
+      cta: 'Contáctanos',
+      ctaHint: 'Cuéntanos tu idea — sin compromiso. Te respondemos pronto.',
       f1: {
         title: 'Ingeniería de precisión',
         subtitle: 'Nivel de detalle tipo Apple',

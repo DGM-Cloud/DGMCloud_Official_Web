@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import { ArrowUpRight, MessageCircleMore } from 'lucide-react';
 import { BrandLogoImg } from '@/components/brand-logo';
 import { useTranslations } from '@/lib/i18n/locale-context';
 import { SITE_BRAND_HEX } from '@/lib/site-brand';
@@ -88,12 +89,20 @@ export function Header() {
             initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.45 }}
-            whileHover={{ scale: 1.06, transition: springInteract }}
-            whileTap={{ scale: 0.94, transition: springInteract }}
-            className="btn-shimmer inline-flex items-center px-5 py-2 text-[13px] font-semibold tracking-wide text-primary-foreground bg-primary"
-            style={{ borderRadius: '6px', willChange: 'transform' }}
+            whileHover={{ y: -1, transition: springInteract }}
+            whileTap={{ scale: 0.97, transition: springInteract }}
+            className="btn-shimmer group relative inline-flex shrink-0 items-center gap-2 rounded-full border border-white/18 bg-primary px-6 py-2.5 text-[13px] font-semibold tracking-[0.03em] text-primary-foreground shadow-[0_8px_28px_-5px_rgba(0,115,252,0.52),inset_0_1px_0_rgba(255,255,255,0.2)] md:px-7"
           >
-            {t('nav.cta')}
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-x-4 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-white/45 to-transparent"
+            />
+            <MessageCircleMore className="relative size-[0.95rem] shrink-0 opacity-95" aria-hidden />
+            <span className="relative">{t('nav.cta')}</span>
+            <ArrowUpRight
+              className="relative size-[0.82rem] shrink-0 opacity-90 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-px group-hover:-translate-y-px md:size-[0.9rem]"
+              aria-hidden
+            />
           </motion.a>
         </div>
 
@@ -145,10 +154,15 @@ export function Header() {
             <div className="pt-3">
               <a
                 href="#contact"
-                className="btn-shimmer flex w-full items-center justify-center bg-primary py-2.5 text-sm font-semibold text-primary-foreground"
+                className="btn-shimmer group relative flex w-full items-center justify-center gap-2 rounded-full border border-white/18 bg-primary py-3.5 text-sm font-semibold tracking-wide text-primary-foreground shadow-[0_10px_32px_-8px_rgba(0,115,252,0.5),inset_0_1px_0_rgba(255,255,255,0.2)]"
                 onClick={() => setIsOpen(false)}
               >
-                {t('nav.cta')}
+                <span
+                  aria-hidden
+                  className="pointer-events-none absolute inset-x-6 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-white/40 to-transparent"
+                />
+                <MessageCircleMore className="size-[1rem] shrink-0 opacity-95" aria-hidden />
+                <span>{t('nav.cta')}</span>
               </a>
             </div>
           </nav>

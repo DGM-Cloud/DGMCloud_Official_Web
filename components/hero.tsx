@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
+import { ArrowUpRight, Layers2, Sparkles } from 'lucide-react';
 import BlurText from '@/components/blur-text';
 import { useTranslations } from '@/lib/i18n/locale-context';
 
@@ -110,41 +111,50 @@ export function Hero() {
           variants={itemVariants}
           className="mb-10 flex flex-col items-center justify-center gap-3 sm:flex-row md:mb-24 md:gap-5"
         >
-          {/* Primary — shimmer + spring hover + radial light pulse */}
-          <motion.div
-            className="relative"
-            whileHover="hover"
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 420, damping: 18 }}
+          {/* Primary — marca: brillo superior, borde y sombra al color */}
+          <motion.a
+            href="#contact"
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.985 }}
+            transition={{ type: 'spring', stiffness: 460, damping: 22 }}
+            className="btn-shimmer group relative z-10 inline-flex min-h-[2.875rem] shrink-0 items-center justify-center gap-2 rounded-full border border-white/20 bg-primary px-8 py-3 text-[13px] font-semibold tracking-[0.04em] text-primary-foreground shadow-[0_10px_36px_-8px_rgba(0,115,252,0.55),inset_0_1px_0_rgba(255,255,255,0.2)] sm:min-h-[3rem] sm:gap-2.5 sm:px-10 sm:text-sm sm:tracking-wide"
           >
-            <motion.a
-              href="#contact"
-              className="btn-shimmer relative z-10 inline-flex items-center gap-2.5 bg-primary px-8 py-3.5 text-sm font-semibold tracking-wide text-primary-foreground"
-              style={{ borderRadius: '6px' }}
-            >
-              {t('hero.ctaPrimary')} <span>→</span>
-            </motion.a>
-            {/* Radial light burst on hover */}
-            <motion.div
+            <span
               aria-hidden
-              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary"
-              variants={{ hover: { scale: 7, opacity: 0 } }}
-              initial={{ scale: 0.4, opacity: 0.3 }}
-              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] as const }}
-              style={{ width: 72, height: 72, filter: 'blur(22px)', zIndex: -1 }}
+              className="pointer-events-none absolute inset-x-5 top-0 h-px rounded-full bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-80 sm:inset-x-7"
             />
-          </motion.div>
+            <Sparkles
+              aria-hidden
+              className="size-[1rem] shrink-0 opacity-[0.92] sm:size-[1.125rem]"
+            />
+            <span className="whitespace-normal text-center leading-tight sm:whitespace-nowrap">
+              {t('hero.ctaPrimary')}
+            </span>
+            <ArrowUpRight
+              aria-hidden
+              className="size-[1rem] shrink-0 transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-[2px] group-hover:-translate-y-[2px] sm:size-[1.125rem]"
+            />
+          </motion.a>
 
-          {/* Secondary — ghost with spring hover → portafolio */}
+          {/* Secondary — cristal con acento en hover */}
           <motion.a
             href="#portfolio"
-            className="inline-flex items-center gap-2 border border-white/10 bg-white/[0.03] px-8 py-3.5 text-sm font-semibold tracking-wide text-foreground/70 backdrop-blur-sm"
-            style={{ borderRadius: '6px' }}
-            whileHover={{ scale: 1.04, borderColor: 'rgba(255,255,255,0.2)', color: '#ffffff' }}
-            whileTap={{ scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+            whileHover={{ y: -1 }}
+            whileTap={{ scale: 0.985 }}
+            transition={{ type: 'spring', stiffness: 420, damping: 20 }}
+            className="group relative inline-flex min-h-[2.875rem] shrink-0 items-center justify-center gap-2 rounded-full border border-white/[0.13] bg-white/[0.04] px-8 py-3 text-[13px] font-semibold tracking-[0.04em] text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,0.09)] backdrop-blur-md transition-[color,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[rgba(0,115,252,0.5)] hover:text-white hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_0_1px_rgba(0,115,252,0.12),0_12px_40px_-12px_rgba(0,115,252,0.35)] sm:min-h-[3rem] sm:gap-2.5 sm:px-10 sm:text-sm sm:tracking-wide"
           >
-            {t('hero.ctaSecondary')}
+            <Layers2
+              aria-hidden
+              className="size-[1rem] shrink-0 text-white/55 transition-colors duration-300 group-hover:text-primary sm:size-[1.125rem]"
+            />
+            <span className="whitespace-normal text-center leading-tight sm:whitespace-nowrap">
+              {t('hero.ctaSecondary')}
+            </span>
+            <ArrowUpRight
+              aria-hidden
+              className="size-[0.9rem] shrink-0 opacity-70 transition-all duration-300 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] group-hover:opacity-100 sm:size-[1rem]"
+            />
           </motion.a>
         </motion.div>
 
