@@ -1,0 +1,296 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --card: #121212;
+  --card-foreground: #ffffff;
+  --popover: #121212;
+  --popover-foreground: #ffffff;
+  --primary: #00e5ff;
+  --primary-foreground: #050505;
+  --secondary: #27272a;
+  --secondary-foreground: #ffffff;
+  --muted: #27272a;
+  --muted-foreground: #94a3b8;
+  --accent: #00e5ff;
+  --accent-foreground: #050505;
+  --destructive: #ff3b30;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: #18181b;
+  --ring: #00e5ff;
+  --radius: 0.625rem;
+  --grain-opacity: 0.015;
+}
+
+.dark {
+  --background: #050505;
+  --foreground: #ffffff;
+  --card: #121212;
+  --card-foreground: #ffffff;
+  --popover: #121212;
+  --popover-foreground: #ffffff;
+  --primary: #00e5ff;
+  --primary-foreground: #050505;
+  --secondary: #27272a;
+  --secondary-foreground: #ffffff;
+  --muted: #27272a;
+  --muted-foreground: #94a3b8;
+  --accent: #00e5ff;
+  --accent-foreground: #050505;
+  --destructive: #ff3b30;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.08);
+  --input: #18181b;
+  --ring: #00e5ff;
+}
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  
+  html {
+    /* Fallback si JS/WebGL falla; el Plasma va en capa z-0 encima */
+    @apply bg-[#050505];
+  }
+
+  body {
+    @apply bg-transparent text-foreground;
+    position: relative;
+    overflow-x: hidden;
+    /* Grano + viñeta viven en PlasmaBackground (z-0), no aquí — evita tapar WebGL */
+  }
+}
+
+@layer components {
+  /* ── Legacy glassmorphism (kept for compatibility) ── */
+  .glassmorphism {
+    @apply backdrop-blur-md bg-card/40 border border-border/20 rounded-lg;
+  }
+
+  /*
+   * "CLOUD" iridescent text effect — pure CSS, no WebGL container.
+   * Uses animated conic-gradient clipped to the text.
+   * Works as a complement/replacement for the WebGL IridescentOverlay.
+   */
+  .cloud-iridescent {
+    background: conic-gradient(
+      from var(--irid-angle, 0deg),
+      #00e5ff 0%,
+      #ffffff 18%,
+      #06b6d4 32%,
+      #a5f3fc 48%,
+      #00e5ff 60%,
+      #ffffff 75%,
+      #67e8f9 88%,
+      #00e5ff 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: iridRotate 6s linear infinite;
+  }
+
+  @property --irid-angle {
+    syntax: '<angle>';
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes iridRotate {
+    to { --irid-angle: 360deg; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cloud-iridescent {
+      animation: none;
+      background: linear-gradient(135deg, #00e5ff, #a5f3fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  /* ── Glass card: 1 px border + bottom mask reflection ── */
+  .glass-card {
+    position: relative;
+    background: rgba(18, 18, 18, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  /* Specular top sheen */
+  .glass-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.045) 0%,
+      transparent 45%
+    );
+    z-index: 1;
+    border-radius: inherit;
+  }
+  /* Cursor-tracking reflection — follows --mx / --my set by GlassCardGlow */
+  .glass-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at var(--mx, 50%) var(--my, 100%),
+      rgba(0, 229, 255, 0.07) 0%,
+      transparent 60%
+    );
+    z-index: 1;
+    border-radius: inherit;
+    transition: background 0.1s ease;
+  }
+
+  /* ── Mask reveal: text emerges from clip rather than fading ── */
+  .mask-reveal {
+    overflow: hidden;
+  }
+  .mask-reveal > * {
+    display: block;
+  }
+
+  /* ── Primary CTA: shimmer sweep ── */
+  .btn-shimmer {
+    position: relative;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+  .btn-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -110%;
+    width: 60%;
+    height: 100%;
+    background: linear-gradient(
+      105deg,
+      transparent 20%,
+      rgba(255, 255, 255, 0.22) 50%,
+      transparent 80%
+    );
+    transition: left 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  .btn-shimmer:hover::after {
+    left: 160%;
+  }
+
+  /* ── Legacy ── */
+  .gloss-effect {
+    position: relative;
+    overflow: hidden;
+  }
+  .gloss-effect::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s;
+  }
+  .gloss-effect:hover::before {
+    left: 100%;
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #00e5ff 0%, #00e5ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.8s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .stagger-child {
+    animation-fill-mode: both;
+  }
+
+  /* Glow Pulse — syncs visually with the background blobs */
+  @keyframes glowPulse {
+    0%, 100% {
+      filter: drop-shadow(0 0 14px rgba(0, 229, 255, 0.35))
+              drop-shadow(0 0 40px rgba(0, 229, 255, 0.12));
+    }
+    50% {
+      filter: drop-shadow(0 0 28px rgba(0, 229, 255, 0.65))
+              drop-shadow(0 0 70px rgba(0, 229, 255, 0.22));
+    }
+  }
+
+  .glow-pulse {
+    animation: glowPulse 5s ease-in-out infinite;
+  }
+
+  /* ── Tech stack horizontal marquee ── */
+  @keyframes tech-marquee-x {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  .tech-marquee-track {
+    display: flex;
+    width: max-content;
+    gap: 3rem;
+    animation: tech-marquee-x 52s linear infinite;
+  }
+
+  .tech-marquee-track:hover {
+    animation-play-state: paused;
+  }
+}
