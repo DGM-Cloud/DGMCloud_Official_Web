@@ -6,6 +6,7 @@ import { ArrowUpRight, MessageCircleMore } from 'lucide-react';
 import { BrandLogoImg } from '@/components/brand-logo';
 import { useTranslations } from '@/lib/i18n/locale-context';
 import { SITE_BRAND_HEX } from '@/lib/site-brand';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const springInteract = { type: 'spring' as const, stiffness: 420, damping: 18 };
 
@@ -21,7 +22,7 @@ export function Header() {
 
   const LangToggle = ({ className = '' }: { className?: string }) => (
     <div
-      className={`flex items-center gap-0.5 rounded-md border border-white/[0.08] bg-black/40 p-0.5 ${className}`}
+      className={`flex items-center gap-0.5 rounded-md border border-border bg-muted/65 p-0.5 backdrop-blur-sm dark:border-white/[0.08] dark:bg-black/40 dark:backdrop-blur-md ${className}`}
       role="group"
       aria-label="Language"
     >
@@ -30,8 +31,8 @@ export function Header() {
         onClick={() => setLocale('en')}
         className={`rounded px-2 py-1 text-[11px] font-semibold uppercase tracking-wide transition-colors ${
           locale === 'en'
-            ? 'bg-white/[0.12] text-white'
-            : 'text-white/45 hover:text-white/75'
+            ? 'bg-foreground/[0.1] text-foreground dark:bg-white/[0.12] dark:text-white'
+            : 'text-muted-foreground hover:text-foreground dark:text-white/45 dark:hover:text-white/75'
         }`}
       >
         {t('nav.langEn')}
@@ -41,8 +42,8 @@ export function Header() {
         onClick={() => setLocale('es')}
         className={`rounded px-2 py-1 text-[11px] font-semibold uppercase tracking-wide transition-colors ${
           locale === 'es'
-            ? 'bg-white/[0.12] text-white'
-            : 'text-white/45 hover:text-white/75'
+            ? 'bg-foreground/[0.1] text-foreground dark:bg-white/[0.12] dark:text-white'
+            : 'text-muted-foreground hover:text-foreground dark:text-white/45 dark:hover:text-white/75'
         }`}
       >
         {t('nav.langEs')}
@@ -51,7 +52,7 @@ export function Header() {
   );
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-40 border-b border-white/[0.08] bg-black/50 backdrop-blur-md supports-[backdrop-filter]:bg-black/35">
+    <header className="fixed left-0 right-0 top-0 z-40 border-b border-border bg-background/75 backdrop-blur-md supports-[backdrop-filter]:bg-background/65 dark:bg-black/50 dark:supports-[backdrop-filter]:bg-black/35 dark:border-white/[0.08]">
       <div className="mx-auto flex min-h-14 max-w-6xl items-center justify-between gap-4 px-6 py-3 md:min-h-[4rem]">
         <motion.a
           href="#top"
@@ -60,7 +61,7 @@ export function Header() {
           transition={{ duration: 0.5 }}
           whileHover={{ opacity: 0.92 }}
           whileTap={{ scale: 0.98 }}
-          className="flex shrink-0 items-center text-left outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+          className="flex shrink-0 items-center text-left outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
           aria-label={t('nav.logoAria')}
         >
           <BrandLogoImg priority className="h-11 w-auto md:h-14" alt="" />
@@ -75,7 +76,7 @@ export function Header() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
               whileHover={{ color: SITE_BRAND_HEX }}
-              className="text-[13px] font-medium text-white/50 transition-none"
+              className="text-[13px] font-medium text-muted-foreground transition-none hover:text-primary dark:text-white/50"
             >
               {t(item.labelKey)}
             </motion.a>
@@ -84,6 +85,7 @@ export function Header() {
 
         <div className="hidden items-center gap-3 md:flex">
           <LangToggle />
+          <ThemeToggle />
           <motion.a
             href="#contact"
             initial={{ opacity: 0, x: 16 }}
@@ -91,7 +93,7 @@ export function Header() {
             transition={{ duration: 0.45 }}
             whileHover={{ y: -1, transition: springInteract }}
             whileTap={{ scale: 0.97, transition: springInteract }}
-            className="btn-shimmer group relative inline-flex shrink-0 items-center gap-2 rounded-full border border-white/18 bg-primary px-6 py-2.5 text-[13px] font-semibold tracking-[0.03em] text-primary-foreground shadow-[0_8px_28px_-5px_rgba(0,115,252,0.52),inset_0_1px_0_rgba(255,255,255,0.2)] md:px-7"
+            className="btn-shimmer group relative inline-flex shrink-0 items-center gap-2 rounded-full border border-primary/35 bg-primary px-6 py-2.5 text-[13px] font-semibold tracking-[0.03em] text-primary-foreground shadow-[0_8px_28px_-5px_rgba(0,115,252,0.52),inset_0_1px_0_rgba(255,255,255,0.2)] dark:border-white/18 md:px-7"
           >
             <span
               aria-hidden
@@ -108,12 +110,13 @@ export function Header() {
 
         <div className="flex items-center gap-2 md:hidden">
           <LangToggle />
+          <ThemeToggle />
           <motion.button
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.4 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="rounded-md p-2 text-white/60 hover:text-white"
+            className="rounded-md p-2 text-muted-foreground hover:text-foreground dark:text-white/60 dark:hover:text-white"
             aria-expanded={isOpen}
             aria-label={t('nav.menu')}
           >
@@ -138,14 +141,14 @@ export function Header() {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
-          className="border-t border-white/[0.06] bg-black/60 backdrop-blur-lg md:hidden"
+          className="border-t border-border bg-background/92 backdrop-blur-lg dark:border-white/[0.06] dark:bg-black/60 md:hidden"
         >
           <nav className="mx-auto max-w-6xl space-y-1 px-6 py-4">
             {navItems.map((item) => (
               <a
                 key={item.labelKey}
                 href={item.href}
-                className="block py-2 text-sm text-white/50 transition-colors hover:text-primary"
+                className="block py-2 text-sm text-muted-foreground transition-colors hover:text-primary dark:text-white/50"
                 onClick={() => setIsOpen(false)}
               >
                 {t(item.labelKey)}
@@ -154,7 +157,7 @@ export function Header() {
             <div className="pt-3">
               <a
                 href="#contact"
-                className="btn-shimmer group relative flex w-full items-center justify-center gap-2 rounded-full border border-white/18 bg-primary py-3.5 text-sm font-semibold tracking-wide text-primary-foreground shadow-[0_10px_32px_-8px_rgba(0,115,252,0.5),inset_0_1px_0_rgba(255,255,255,0.2)]"
+                className="btn-shimmer group relative flex w-full items-center justify-center gap-2 rounded-full border border-primary/35 bg-primary py-3.5 text-sm font-semibold tracking-wide text-primary-foreground shadow-[0_10px_32px_-8px_rgba(0,115,252,0.5),inset_0_1px_0_rgba(255,255,255,0.2)] dark:border-white/18"
                 onClick={() => setIsOpen(false)}
               >
                 <span

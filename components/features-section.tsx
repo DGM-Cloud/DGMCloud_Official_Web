@@ -36,7 +36,7 @@ export function FeaturesSection() {
   const { t } = useTranslations();
 
   return (
-    <section id="about" className="scroll-mt-24 border-t border-white/[0.06] px-5 py-16 md:scroll-mt-28 md:px-12 md:py-28 lg:px-20">
+    <section id="about" className="scroll-mt-24 border-t border-border px-5 py-16 md:scroll-mt-28 md:px-12 md:py-28 lg:px-20">
       <div className="mx-auto max-w-5xl">
 
         {/* Header */}
@@ -78,7 +78,7 @@ export function FeaturesSection() {
                 width="100%"
                 height="auto"
                 {...cardGlass}
-                className="min-h-[260px] border border-white/[0.07]"
+                className="min-h-[260px] border border-border dark:border-white/[0.07]"
                 innerClassName="flex h-full min-h-[260px] flex-col items-stretch justify-start p-8 text-left"
               >
                 <p className="mb-6 font-mono text-[11px] font-medium tracking-widest text-primary/50">
@@ -119,7 +119,7 @@ export function FeaturesSection() {
         >
           <a
             href="#contact"
-            className="btn-shimmer group relative inline-flex min-h-[2.875rem] shrink-0 items-center gap-2 rounded-full border border-white/18 bg-primary px-7 py-2.5 text-sm font-semibold tracking-[0.04em] text-primary-foreground shadow-[0_8px_32px_-6px_rgba(0,115,252,0.5),inset_0_1px_0_rgba(255,255,255,0.2)] transition-[transform] duration-300 hover:-translate-y-px md:px-8"
+            className="btn-shimmer group relative inline-flex min-h-[2.875rem] shrink-0 items-center gap-2 rounded-full border border-primary/35 bg-primary px-7 py-2.5 text-sm font-semibold tracking-[0.04em] text-primary-foreground shadow-[0_8px_32px_-6px_rgba(0,115,252,0.5),inset_0_1px_0_rgba(255,255,255,0.2)] transition-[transform] duration-300 hover:-translate-y-px dark:border-white/18 md:px-8"
           >
             <span
               aria-hidden

@@ -561,7 +561,7 @@ function ExpertiseTextPanel({
         {section.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded border px-2.5 py-1 text-[11px] font-medium tracking-wide text-white/45"
+            className="rounded border px-2.5 py-1 text-[11px] font-medium tracking-wide text-muted-foreground dark:text-white/45"
             style={{ borderColor: `${section.accentColor}28` }}
           >
             {tag}
@@ -592,7 +592,7 @@ export function StickyScrollExpertise() {
   });
 
   return (
-    <section id="services" className="relative scroll-mt-24 border-t border-white/[0.06] md:scroll-mt-28">
+    <section id="services" className="relative scroll-mt-24 border-t border-border md:scroll-mt-28">
       {/* Móvil: solo copy, sin sticky largo ni morph (terminal/teléfono/cloud) */}
       <div className="md:hidden">
         <div className="mx-auto max-w-2xl space-y-10 px-5 py-12">

@@ -13,6 +13,9 @@ export const dictionaries = {
       langEn: 'EN',
       langEs: 'ES',
       logoAria: 'Go to top — DGM CLOUD',
+      themeAriaLight: 'Switch to light theme',
+      themeAriaDark: 'Switch to dark theme',
+      themeAria: 'Toggle color theme',
     },
     hero: {
       eyebrow: 'Elite Software Engineering Firm',
@@ -156,6 +159,9 @@ export const dictionaries = {
       langEn: 'EN',
       langEs: 'ES',
       logoAria: 'Ir al inicio — DGM CLOUD',
+      themeAriaLight: 'Cambiar a tema claro',
+      themeAriaDark: 'Cambiar a tema oscuro',
+      themeAria: 'Cambiar tema de color',
     },
     hero: {
       eyebrow: 'Firma de ingeniería de software de élite',

@@ -183,7 +183,7 @@ export function ContactForm() {
                 <SelectContent
                   position="popper"
                   sideOffset={6}
-                  className="max-h-[min(280px,var(--radix-select-content-available-height))] rounded-lg border border-white/[0.1] bg-[#0c0c0e]/98 font-mono text-sm shadow-[0_12px_40px_rgba(0,0,0,0.55)] backdrop-blur-xl [&_*[role=option]]:rounded-md"
+                  className="max-h-[min(280px,var(--radix-select-content-available-height))] rounded-lg border border-border bg-popover font-mono text-sm text-popover-foreground shadow-lg backdrop-blur-xl dark:border-white/[0.1] dark:bg-[#0c0c0e]/98 dark:shadow-[0_12px_40px_rgba(0,0,0,0.55)] [&_*[role=option]]:rounded-md"
                 >
                   {PROJECT_OPTIONS.map(([value, labelKey]) => (
                     <SelectItem

@@ -34,19 +34,21 @@ function PortfolioBrowserPreview({ siteUrl }: { siteUrl: string }) {
   const [broken, setBroken] = useState(false);
 
   return (
-    <div className="border-b border-white/[0.07] bg-[#121214]">
+    <div className="border-b border-border bg-muted/80 dark:border-white/[0.07] dark:bg-[#121214]">
       <div className="flex items-center gap-2 px-3 py-2.5">
         <span className="flex shrink-0 gap-1.5" aria-hidden>
           <span className="size-2 rounded-full bg-[#ff5f57]/90" />
           <span className="size-2 rounded-full bg-[#febc2e]/90" />
           <span className="size-2 rounded-full bg-[#28c840]/90" />
         </span>
-        <div className="min-w-0 flex-1 rounded-md bg-black/55 px-3 py-1.5">
-          <p className="truncate text-center text-[10px] font-mono tracking-tight text-white/40">{hostname}</p>
+        <div className="min-w-0 flex-1 rounded-md bg-background/85 px-3 py-1.5 dark:bg-black/55">
+          <p className="truncate text-center text-[10px] font-mono tracking-tight text-muted-foreground dark:text-white/40">
+            {hostname}
+          </p>
         </div>
       </div>
 
-      <div className="relative aspect-[16/10] w-full overflow-hidden bg-[#060607]">
+      <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted dark:bg-[#060607]">
         {!broken ? (
           <Image
             src={thumbSrc}
@@ -58,19 +60,18 @@ function PortfolioBrowserPreview({ siteUrl }: { siteUrl: string }) {
             onError={() => setBroken(true)}
           />
         ) : (
-          <div className="flex h-full min-h-[168px] flex-col items-center justify-center gap-3 bg-gradient-to-br from-blue-950/35 via-[#0c0c0e] to-blue-950/25 px-6 text-center">
+          <div className="flex h-full min-h-[168px] flex-col items-center justify-center gap-3 bg-gradient-to-br from-blue-950/35 via-[#f1f5f9] to-blue-950/25 px-6 text-center dark:via-[#0c0c0e]">
             <ExternalLink className="size-9 shrink-0 text-primary/45" aria-hidden />
-            <p className="font-mono text-xs font-medium text-white/55">{hostname}</p>
-            <p className="max-w-[240px] text-[11px] leading-snug text-white/38">{t('portfolio.previewUnavailable')}</p>
+            <p className="font-mono text-xs font-medium text-foreground/70 dark:text-white/55">{hostname}</p>
+            <p className="max-w-[240px] text-[11px] leading-snug text-muted-foreground dark:text-white/38">
+              {t('portfolio.previewUnavailable')}
+            </p>
           </div>
         )}
 
-        <div
-          className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/55 via-transparent to-black/20 opacity-90"
-          aria-hidden
-        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-background/85 via-transparent to-background/35 opacity-95 dark:from-black/55 dark:to-black/20" aria-hidden />
 
-        <div className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5 rounded-md border border-white/12 bg-black/60 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-white/75 opacity-0 shadow-lg backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
+        <div className="pointer-events-none absolute bottom-3 right-3 flex items-center gap-1.5 rounded-md border border-border bg-background/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.12em] text-foreground opacity-0 shadow-lg backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 dark:border-white/12 dark:bg-black/60 dark:text-white/75">
           <ExternalLink className="size-3 opacity-90" aria-hidden />
           {t('portfolio.visitSite')}
         </div>
@@ -102,7 +103,7 @@ export function PortfolioSection() {
   return (
     <section
       id="portfolio"
-      className="scroll-mt-24 border-t border-white/[0.06] px-5 py-16 md:scroll-mt-28 md:px-12 md:py-24 lg:px-20"
+      className="scroll-mt-24 border-t border-border px-5 py-16 md:scroll-mt-28 md:px-12 md:py-24 lg:px-20"
     >
       <div className="mx-auto max-w-6xl">
         <motion.div
@@ -140,7 +141,7 @@ export function PortfolioSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[rgba(14,14,14,0.72)] outline-none ring-offset-background backdrop-blur-md transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-[0_0_48px_rgba(0,115,252,0.12)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card/85 outline-none ring-offset-background backdrop-blur-md transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-[0_0_48px_rgba(0,115,252,0.12)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 dark:border-white/[0.08] dark:bg-[rgba(14,14,14,0.72)] dark:focus-visible:ring-offset-[#050505]"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -154,7 +155,7 @@ export function PortfolioSection() {
               <PortfolioBrowserPreview siteUrl={PROJECT_URL[slug]} />
 
               <div className="relative flex flex-col gap-4 p-7">
-                <span className="inline-flex w-fit rounded-md border border-blue-400/35 bg-blue-600/[0.09] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-blue-100">
+                <span className="inline-flex w-fit rounded-md border border-blue-400/35 bg-blue-600/10 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-blue-950 dark:bg-blue-600/[0.09] dark:text-blue-100">
                   {t('portfolio.badgeWeb')}
                 </span>
                 <BlurText
@@ -188,7 +189,7 @@ export function PortfolioSection() {
           <span>{t('portfolio.footnote')}</span>
           <a
             href="#contact"
-            className="font-semibold text-primary underline-offset-4 transition-colors hover:text-blue-300 hover:underline"
+            className="font-semibold text-primary underline-offset-4 transition-colors hover:underline hover:text-blue-900 dark:hover:text-blue-300"
           >
             {t('portfolio.footnoteCta')} →
           </a>

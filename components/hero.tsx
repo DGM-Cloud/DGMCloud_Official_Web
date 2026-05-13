@@ -117,7 +117,7 @@ export function Hero() {
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.985 }}
             transition={{ type: 'spring', stiffness: 460, damping: 22 }}
-            className="btn-shimmer group relative z-10 inline-flex min-h-[2.875rem] shrink-0 items-center justify-center gap-2 rounded-full border border-white/20 bg-primary px-8 py-3 text-[13px] font-semibold tracking-[0.04em] text-primary-foreground shadow-[0_10px_36px_-8px_rgba(0,115,252,0.55),inset_0_1px_0_rgba(255,255,255,0.2)] sm:min-h-[3rem] sm:gap-2.5 sm:px-10 sm:text-sm sm:tracking-wide"
+            className="btn-shimmer group relative z-10 inline-flex min-h-[2.875rem] shrink-0 items-center justify-center gap-2 rounded-full border border-primary/35 bg-primary px-8 py-3 text-[13px] font-semibold tracking-[0.04em] text-primary-foreground shadow-[0_10px_36px_-8px_rgba(0,115,252,0.55),inset_0_1px_0_rgba(255,255,255,0.2)] dark:border-white/20 sm:min-h-[3rem] sm:gap-2.5 sm:px-10 sm:text-sm sm:tracking-wide"
           >
             <span
               aria-hidden
@@ -142,11 +142,11 @@ export function Hero() {
             whileHover={{ y: -1 }}
             whileTap={{ scale: 0.985 }}
             transition={{ type: 'spring', stiffness: 420, damping: 20 }}
-            className="group relative inline-flex min-h-[2.875rem] shrink-0 items-center justify-center gap-2 rounded-full border border-white/[0.13] bg-white/[0.04] px-8 py-3 text-[13px] font-semibold tracking-[0.04em] text-white/85 shadow-[inset_0_1px_0_rgba(255,255,255,0.09)] backdrop-blur-md transition-[color,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[rgba(0,115,252,0.5)] hover:text-white hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_0_1px_rgba(0,115,252,0.12),0_12px_40px_-12px_rgba(0,115,252,0.35)] sm:min-h-[3rem] sm:gap-2.5 sm:px-10 sm:text-sm sm:tracking-wide"
+            className="group relative inline-flex min-h-[2.875rem] shrink-0 items-center justify-center gap-2 rounded-full border border-border bg-muted/50 px-8 py-3 text-[13px] font-semibold tracking-[0.04em] text-foreground/90 shadow-[inset_0_1px_0_rgba(255,255,255,0.55)] backdrop-blur-md transition-[color,box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[rgba(0,115,252,0.45)] hover:bg-muted/65 hover:text-foreground hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.65),0_0_0_1px_rgba(0,115,252,0.08),0_12px_40px_-12px_rgba(0,115,252,0.22)] sm:min-h-[3rem] sm:gap-2.5 sm:px-10 sm:text-sm sm:tracking-wide dark:border-white/[0.13] dark:bg-white/[0.04] dark:text-white/85 dark:shadow-[inset_0_1px_0_rgba(255,255,255,0.09)] dark:hover:border-[rgba(0,115,252,0.5)] dark:hover:text-white dark:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_0_0_1px_rgba(0,115,252,0.12),0_12px_40px_-12px_rgba(0,115,252,0.35)]"
           >
             <Layers2
               aria-hidden
-              className="size-[1rem] shrink-0 text-white/55 transition-colors duration-300 group-hover:text-primary sm:size-[1.125rem]"
+              className="size-[1rem] shrink-0 text-muted-foreground transition-colors duration-300 group-hover:text-primary sm:size-[1.125rem] dark:text-white/55"
             />
             <span className="whitespace-normal text-center leading-tight sm:whitespace-nowrap">
               {t('hero.ctaSecondary')}

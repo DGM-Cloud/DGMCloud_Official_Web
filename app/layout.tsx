@@ -56,16 +56,16 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`bg-[#050505] ${geistSans.variable} ${geistMono.variable}`}
+      className={`${geistSans.variable} ${geistMono.variable}`}
     >
-      <body className="font-sans antialiased bg-transparent text-foreground">
-        <ScrollProgressBar />
-        <AuroraBackground />
-        <GlassCardGlow />
+      <body className="font-sans min-h-[100dvh] bg-background antialiased text-foreground">
         <AppProviders>
+          <ScrollProgressBar />
+          <AuroraBackground />
+          <GlassCardGlow />
           <div className="relative z-10">{children}</div>
+          {process.env.NODE_ENV === 'production' && <Analytics />}
         </AppProviders>
-        {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
   )

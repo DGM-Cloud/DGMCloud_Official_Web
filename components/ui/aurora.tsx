@@ -1,6 +1,7 @@
 'use client';
 
-import { memo, useEffect, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
+import { useTheme } from 'next-themes';
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
 import {
   SITE_BRAND_AURORA_HEX,
@@ -132,7 +133,16 @@ export const LANDING_AURORA_STOPS: readonly string[] = [
   '#090816',
 ];
 
+/** Misma geometría/peso que dark; sólo luminancia para tema claro. */
+export const LIGHT_AURORA_STOPS: readonly string[] = [
+  '#b8dafb',
+  SITE_BRAND_AURORA_HEX,
+  '#eef6ff',
+];
+
+/** Halo de acento (modo oscuro — sync lib/site-brand). */
 const SITE_BRAND_RADIAL = `rgba(${SITE_BRAND_RGB[0]}, ${SITE_BRAND_RGB[1]}, ${SITE_BRAND_RGB[2]}, 0.085)`;
+const LIGHT_BRAND_RADIAL = `rgba(${SITE_BRAND_RGB[0]}, ${SITE_BRAND_RGB[1]}, ${SITE_BRAND_RGB[2]}, 0.065)`;
 
 function AuroraInner(props: AuroraProps) {
   const {
@@ -286,29 +296,44 @@ export function Aurora(props: AuroraProps) {
   return <AuroraInner {...props} />;
 }
 
-/** Misma pila que PlasmaBackground: base + efecto + grano + viñeta */
+/** Misma pila que PlasmaBackground: base + efecto + grano + viñeta — sólo cambia paleta por tema. */
 export const AuroraBackground = memo(function AuroraBackground() {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => setMounted(true), []);
+
+  /** Hasta hidratar usar dark (coincide con defaultTheme); evita parpadeo y doble-init WebGL. */
+  const isLight = mounted && resolvedTheme === 'light';
+
+  const baseBackground = isLight
+    ? `
+            radial-gradient(ellipse 110% 58% at 50% -16%, ${LIGHT_BRAND_RADIAL}, transparent 56%),
+            radial-gradient(ellipse 72% 42% at 92% 90%, rgba(0,115,252,0.048), transparent 52%),
+            #ffffff
+          `
+    : `
+            radial-gradient(ellipse 110% 60% at 50% -18%, ${SITE_BRAND_RADIAL}, transparent 55%),
+            radial-gradient(ellipse 70% 45% at 92% 92%, rgba(193, 21, 106, 0.06), transparent 50%),
+            #050505
+          `;
+
+  const vignette =
+    isLight
+      ? 'radial-gradient(ellipse 82% 72% at 50% 38%, transparent 0%, transparent 44%, rgba(148,163,184,0.14) 78%, rgba(248,250,252,0.94) 100%)'
+      : 'radial-gradient(ellipse 80% 70% at 50% 40%, transparent 0%, transparent 36%, rgba(4,14,18,0.45) 74%, rgba(0,0,0,0.84) 100%)';
+
   return (
     <div
       className="pointer-events-none fixed inset-0 z-0 min-h-[100lvh] w-full isolate"
       style={{ WebkitTransform: 'translateZ(0)' }}
       aria-hidden
     >
-      {/* Base Midnight + halo acento (sync lib/site-brand) */}
-      <div
-        className="absolute inset-0 bg-[#050505]"
-        style={{
-          background: `
-            radial-gradient(ellipse 110% 60% at 50% -18%, ${SITE_BRAND_RADIAL}, transparent 55%),
-            radial-gradient(ellipse 70% 45% at 92% 92%, rgba(193, 21, 106, 0.06), transparent 50%),
-            #050505
-          `,
-        }}
-      />
+      <div className="absolute inset-0" style={{ background: baseBackground }} />
 
       <div className="absolute inset-0 min-h-[100lvh]">
         <AuroraInner
-          colorStops={LANDING_AURORA_STOPS}
+          colorStops={isLight ? LIGHT_AURORA_STOPS : LANDING_AURORA_STOPS}
           blend={0.52}
           amplitude={0.92}
           speed={2.4}
@@ -317,20 +342,14 @@ export const AuroraBackground = memo(function AuroraBackground() {
       </div>
 
       <div
-        className="absolute inset-0 opacity-[0.035]"
+        className={`absolute inset-0 ${isLight ? 'opacity-[0.028]' : 'opacity-[0.035]'}`}
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='400' height='400' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E")`,
           backgroundSize: '400px 400px',
         }}
       />
 
-      <div
-        className="absolute inset-0 z-[1]"
-        style={{
-          background:
-            'radial-gradient(ellipse 80% 70% at 50% 40%, transparent 0%, transparent 36%, rgba(4,14,18,0.45) 74%, rgba(0,0,0,0.84) 100%)',
-        }}
-      />
+      <div className="absolute inset-0 z-[1]" style={{ background: vignette }} />
     </div>
   );
 });

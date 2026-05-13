@@ -4,29 +4,29 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Tokens de marca — sync con lib/site-brand.ts para el HEX principal */
+  /* Light — marca #0073fc; sync RGB con lib/site-brand.ts */
   --brand-accent-rgb: 0 115 252;
-  --background: #050505;
-  --foreground: #ffffff;
-  --card: #121212;
-  --card-foreground: #ffffff;
-  --popover: #121212;
-  --popover-foreground: #ffffff;
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #f8fafc;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
   --primary: #0073fc;
-  --primary-foreground: #050505;
-  --secondary: #27272a;
-  --secondary-foreground: #ffffff;
-  --muted: #27272a;
-  --muted-foreground: #94a3b8;
+  --primary-foreground: #ffffff;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
   --accent: #0073fc;
-  --accent-foreground: #050505;
-  --destructive: #ff3b30;
+  --accent-foreground: #ffffff;
+  --destructive: #e11d48;
   --destructive-foreground: #ffffff;
-  --border: rgba(255, 255, 255, 0.08);
-  --input: #18181b;
+  --border: rgba(15, 23, 42, 0.1);
+  --input: #e2e8f0;
   --ring: #0073fc;
   --radius: 0.625rem;
-  --grain-opacity: 0.015;
+  --grain-opacity: 0.03;
 }
 
 .dark {
@@ -49,6 +49,7 @@
   --border: rgba(255, 255, 255, 0.08);
   --input: #18181b;
   --ring: #0073fc;
+  --grain-opacity: 0.015;
 }
 
 @theme inline {
@@ -85,8 +86,8 @@
   }
   
   html {
-    /* Fallback si JS/WebGL falla; el Plasma va en capa z-0 encima */
-    @apply bg-[#050505];
+    /* Fallback coherent con tokens; aurora/full-bleed en capa z-0 */
+    @apply bg-background;
   }
 
   body {
@@ -149,12 +150,16 @@
   /* ── Glass card: 1 px border + bottom mask reflection ── */
   .glass-card {
     position: relative;
-    background: rgba(18, 18, 18, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.78);
+    border: 1px solid rgba(15, 23, 42, 0.09);
     backdrop-filter: blur(18px);
     -webkit-backdrop-filter: blur(18px);
     border-radius: 16px;
     overflow: hidden;
+  }
+  .dark .glass-card {
+    background: rgba(18, 18, 18, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
   /* Specular top sheen */
   .glass-card::before {
@@ -164,11 +169,18 @@
     pointer-events: none;
     background: linear-gradient(
       160deg,
-      rgba(255, 255, 255, 0.045) 0%,
+      rgba(255, 255, 255, 0.5) 0%,
       transparent 45%
     );
     z-index: 1;
     border-radius: inherit;
+  }
+  .dark .glass-card::before {
+    background: linear-gradient(
+      160deg,
+      rgba(255, 255, 255, 0.045) 0%,
+      transparent 45%
+    );
   }
   /* Cursor-tracking reflection — follows --mx / --my set by GlassCardGlow */
   .glass-card::after {

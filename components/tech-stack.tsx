@@ -69,7 +69,7 @@ function TechCarouselChip({ tech }: { tech: TechItem }) {
 
   return (
     <div
-      className={`group relative flex shrink-0 items-center gap-4 overflow-hidden rounded-2xl border border-white/[0.08] bg-card/40 px-7 py-4 backdrop-blur-md transition-all duration-300 ${hover.border} ${hover.shadow}`}
+      className={`group relative flex shrink-0 items-center gap-4 overflow-hidden rounded-2xl border border-border bg-card/50 px-7 py-4 backdrop-blur-md transition-all duration-300 dark:border-white/[0.08] dark:bg-card/40 ${hover.border} ${hover.shadow}`}
     >
       <div
         className={`pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100 ${hover.overlay}`}
@@ -134,7 +134,7 @@ export function TechStack() {
         </motion.div>
       </div>
 
-      <div className="relative border-y border-white/[0.06] bg-black/25 py-6 md:py-10">
+      <div className="relative border-y border-border bg-muted/30 py-6 dark:border-white/[0.06] dark:bg-black/25 md:py-10">
         <div
           className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent md:w-28"
           aria-hidden

@@ -10,7 +10,7 @@ export function TechSpecsBar() {
 
   return (
     <motion.div
-      className="hidden border-y border-white/[0.06] px-5 py-8 md:block md:px-12 md:py-10 lg:px-20"
+      className="hidden border-y border-border px-5 py-8 md:block md:px-12 md:py-10 lg:px-20 dark:border-white/[0.06]"
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, margin: '-80px' }}
@@ -19,7 +19,7 @@ export function TechSpecsBar() {
         visible: { transition: { staggerChildren: 0.12, delayChildren: 0.05 } },
       }}
     >
-      <div className="mx-auto grid max-w-5xl grid-cols-1 divide-y divide-white/[0.06] md:grid-cols-3 md:divide-x md:divide-y-0">
+      <div className="mx-auto grid max-w-5xl grid-cols-1 divide-y divide-border md:grid-cols-3 md:divide-x md:divide-y-0 dark:divide-white/[0.06]">
         {SPEC_KEYS.map((key, specIdx) => (
           <motion.div
             key={key}
@@ -36,7 +36,7 @@ export function TechSpecsBar() {
             <span className="shrink-0 font-mono text-[11px] font-medium tracking-widest text-primary/60">
               {String(specIdx + 1).padStart(2, '0')}
             </span>
-            <span className="text-sm font-medium tracking-tight text-white/55 md:text-base">
+            <span className="text-sm font-medium tracking-tight text-muted-foreground md:text-base dark:text-white/55">
               {t(key)}
             </span>
           </motion.div>
