@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { BrandLogoImg } from '@/components/brand-logo';
 import { useTranslations } from '@/lib/i18n/locale-context';
+import { SITE_BRAND_HEX } from '@/lib/site-brand';
 
 const springInteract = { type: 'spring' as const, stiffness: 420, damping: 18 };
 
@@ -72,7 +73,7 @@ export function Header() {
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, delay: i * 0.08 }}
-              whileHover={{ color: '#00e5ff' }}
+              whileHover={{ color: SITE_BRAND_HEX }}
               className="text-[13px] font-medium text-white/50 transition-none"
             >
               {t(item.labelKey)}

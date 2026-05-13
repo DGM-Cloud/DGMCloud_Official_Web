@@ -58,7 +58,7 @@ function PortfolioBrowserPreview({ siteUrl }: { siteUrl: string }) {
             onError={() => setBroken(true)}
           />
         ) : (
-          <div className="flex h-full min-h-[168px] flex-col items-center justify-center gap-3 bg-gradient-to-br from-cyan-950/35 via-[#0c0c0e] to-violet-950/25 px-6 text-center">
+          <div className="flex h-full min-h-[168px] flex-col items-center justify-center gap-3 bg-gradient-to-br from-blue-950/35 via-[#0c0c0e] to-blue-950/25 px-6 text-center">
             <ExternalLink className="size-9 shrink-0 text-primary/45" aria-hidden />
             <p className="font-mono text-xs font-medium text-white/55">{hostname}</p>
             <p className="max-w-[240px] text-[11px] leading-snug text-white/38">{t('portfolio.previewUnavailable')}</p>
@@ -140,21 +140,21 @@ export function PortfolioSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[rgba(14,14,14,0.72)] outline-none ring-offset-background backdrop-blur-md transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-[0_0_48px_rgba(0,229,255,0.1)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[rgba(14,14,14,0.72)] outline-none ring-offset-background backdrop-blur-md transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-[0_0_48px_rgba(18,48,224,0.12)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 aria-hidden
                 style={{
                   background:
-                    'radial-gradient(ellipse 90% 55% at 50% 0%, rgba(0,229,255,0.1), transparent 60%)',
+                    'radial-gradient(ellipse 90% 55% at 50% 0%, rgba(18,48,224,0.12), transparent 60%)',
                 }}
               />
 
               <PortfolioBrowserPreview siteUrl={PROJECT_URL[slug]} />
 
               <div className="relative flex flex-col gap-4 p-7">
-                <span className="inline-flex w-fit rounded-md border border-cyan-400/35 bg-cyan-500/[0.09] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-cyan-100">
+                <span className="inline-flex w-fit rounded-md border border-blue-400/35 bg-blue-600/[0.09] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-blue-100">
                   {t('portfolio.badgeWeb')}
                 </span>
                 <BlurText
@@ -169,7 +169,7 @@ export function PortfolioSection() {
                 <p className="font-mono text-[11px] leading-snug tracking-wide text-primary/55">
                   {t(`portfolio.projects.${slug}.stack`)}
                 </p>
-                <span className="inline-flex items-center gap-2 pt-1 text-sm font-semibold text-primary transition-colors group-hover:text-cyan-300">
+                <span className="inline-flex items-center gap-2 pt-1 text-sm font-semibold text-primary transition-colors group-hover:text-blue-300">
                   <ExternalLink className="size-4 opacity-80" aria-hidden />
                   {t('portfolio.visitSite')} →
                 </span>
@@ -188,7 +188,7 @@ export function PortfolioSection() {
           <span>{t('portfolio.footnote')}</span>
           <a
             href="#contact"
-            className="font-semibold text-primary underline-offset-4 transition-colors hover:text-cyan-300 hover:underline"
+            className="font-semibold text-primary underline-offset-4 transition-colors hover:text-blue-300 hover:underline"
           >
             {t('portfolio.footnoteCta')} →
           </a>

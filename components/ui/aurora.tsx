@@ -2,6 +2,10 @@
 
 import { memo, useEffect, useRef } from 'react';
 import { Renderer, Program, Mesh, Color, Triangle } from 'ogl';
+import {
+  SITE_BRAND_AURORA_HEX,
+  SITE_BRAND_RGB,
+} from '@/lib/site-brand';
 
 const VERT = /* glsl */ `#version 300 es
 in vec2 position;
@@ -119,17 +123,16 @@ export interface AuroraProps {
   className?: string;
 }
 
-const DEFAULT_STOPS = ['#071a22', '#00cfe3', '#140a18'];
+const DEFAULT_STOPS = ['#060d20', SITE_BRAND_AURORA_HEX, '#0a0818'];
 
-/**
- * Ramp horizontal del Aurora alineada con Midnight:
- * teal-negro → cian marca (#00e5ff cercano) → violeta/fucsia muy oscuro (eco --accent histórico).
- */
+/** Ramp → navío oscuro → azul haz → borde casi negro. */
 export const LANDING_AURORA_STOPS: readonly string[] = [
-  '#061920',
-  '#00dce8',
-  '#160d18',
+  '#070f24',
+  SITE_BRAND_AURORA_HEX,
+  '#0a0716',
 ];
+
+const SITE_BRAND_RADIAL = `rgba(${SITE_BRAND_RGB[0]}, ${SITE_BRAND_RGB[1]}, ${SITE_BRAND_RGB[2]}, 0.085)`;
 
 function AuroraInner(props: AuroraProps) {
   const {
@@ -291,12 +294,12 @@ export const AuroraBackground = memo(function AuroraBackground() {
       style={{ WebkitTransform: 'translateZ(0)' }}
       aria-hidden
     >
-      {/* Base Midnight + halos muy suaves (cyan / toque fucsia) antes del shader */}
+      {/* Base Midnight + halo acento (sync lib/site-brand) */}
       <div
         className="absolute inset-0 bg-[#050505]"
         style={{
           background: `
-            radial-gradient(ellipse 110% 60% at 50% -18%, rgba(0, 229, 255, 0.085), transparent 55%),
+            radial-gradient(ellipse 110% 60% at 50% -18%, ${SITE_BRAND_RADIAL}, transparent 55%),
             radial-gradient(ellipse 70% 45% at 92% 92%, rgba(193, 21, 106, 0.06), transparent 50%),
             #050505
           `,

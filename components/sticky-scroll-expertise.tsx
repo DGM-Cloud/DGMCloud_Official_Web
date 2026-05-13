@@ -12,6 +12,11 @@ import {
 import { useRef } from 'react';
 import BlurText from '@/components/blur-text';
 import { useTranslations } from '@/lib/i18n/locale-context';
+import { SITE_BRAND_HEX, SITE_BRAND_RGB } from '@/lib/site-brand';
+
+const BR = SITE_BRAND_RGB[0];
+const BG = SITE_BRAND_RGB[1];
+const BB = SITE_BRAND_RGB[2];
 
 /* ─────────────────────────────────────────────────────────
    Content definitions (copy via useTranslations)
@@ -21,7 +26,7 @@ const SECTION_META = [
   {
     id: 'web' as const,
     tags: ['React', 'TypeScript', 'Next.js', 'Node.js'],
-    accentColor: '#00e5ff',
+    accentColor: SITE_BRAND_HEX,
   },
   {
     id: 'mobile' as const,
@@ -40,16 +45,16 @@ const SECTION_META = [
 ───────────────────────────────────────────────────────── */
 
 const WEB_LINES = [
-  { prompt: '$', text: 'npx create-next-app@latest --typescript', color: 'text-[#00e5ff]' },
+  { prompt: '$', text: 'npx create-next-app@latest --typescript', color: 'text-primary' },
   { prompt: '>', text: 'Installing dependencies...', color: 'text-white/50' },
   { prompt: '✔', text: 'Project ready. Launching...', color: 'text-emerald-400' },
-  { prompt: '$', text: 'npm run dev', color: 'text-[#00e5ff]' },
+  { prompt: '$', text: 'npm run dev', color: 'text-primary' },
   { prompt: '●', text: 'http://localhost:3000', color: 'text-white/70' },
 ] as const;
 
 function WebTerminalContent() {
   return (
-    <div className="flex h-full flex-col rounded-xl border border-[#00e5ff]/20 bg-black/80 shadow-2xl shadow-[#00e5ff]/5 ring-1 ring-inset ring-white/[0.06] overflow-hidden">
+    <div className="flex h-full flex-col rounded-xl border border-primary/20 bg-black/80 shadow-2xl shadow-primary/5 ring-1 ring-inset ring-white/[0.06] overflow-hidden">
       {/* Chrome */}
       <div className="flex shrink-0 items-center gap-2 border-b border-white/[0.08] bg-white/[0.03] px-4 py-3">
         <span className="size-2.5 rounded-full bg-red-500/70" />
@@ -62,7 +67,7 @@ function WebTerminalContent() {
       {/* Body */}
       <div
         className="flex-1 overflow-hidden px-5 py-5 font-mono"
-        style={{ textShadow: '0 0 14px rgba(0,229,255,0.3)' }}
+        style={{ textShadow: `0 0 14px rgba(${SITE_BRAND_RGB.join(', ')}, 0.3)` }}
       >
         {WEB_LINES.map((line, i) => (
           <motion.div
@@ -78,7 +83,7 @@ function WebTerminalContent() {
         ))}
         <motion.span
           aria-hidden
-          className="mt-2 inline-block h-4 w-2 bg-[#00e5ff] align-middle"
+          className="mt-2 inline-block h-4 w-2 bg-primary align-middle"
           animate={{ opacity: [1, 0, 1] }}
           transition={{ delay: 1.8, duration: 1, repeat: Infinity, ease: 'easeInOut' }}
         />
@@ -249,8 +254,8 @@ function DashEdge({
 }
 
 const ARCH_NODES = [
-  { id: 'cdn',      x: 50,  y: 10,  label: 'CDN',        color: '#00e5ff', r: 3.8 },
-  { id: 'gateway',  x: 50,  y: 30,  label: 'API Gateway', color: '#00e5ff', r: 3.2 },
+  { id: 'cdn',      x: 50,  y: 10,  label: 'CDN',        color: SITE_BRAND_HEX, r: 3.8 },
+  { id: 'gateway',  x: 50,  y: 30,  label: 'API Gateway', color: SITE_BRAND_HEX, r: 3.2 },
   { id: 'auth',     x: 18,  y: 52,  label: 'Auth',        color: '#10b981', r: 2.8 },
   { id: 'core',     x: 50,  y: 52,  label: 'Core API',    color: '#10b981', r: 3.2 },
   { id: 'queue',    x: 82,  y: 52,  label: 'Queue',       color: '#10b981', r: 2.8 },
@@ -332,8 +337,8 @@ function ArchDiagramContent() {
                   x={node.x - 13.5} y={node.y - 11}
                   width="27" height="5.5"
                   rx="1"
-                  fill="rgba(0,229,255,0.08)"
-                  stroke="rgba(0,229,255,0.35)"
+                  fill={`rgba(${BR},${BG},${BB},0.08)`}
+                  stroke={`rgba(${BR},${BG},${BB},0.35)`}
                   strokeWidth="0.25"
                 />
                 {/* Status dot */}
@@ -346,7 +351,7 @@ function ArchDiagramContent() {
                 <text
                   x={node.x - 8.5} y={node.y - 6.3}
                   fontSize="2.5"
-                  fill="rgba(0,229,255,0.75)"
+                  fill={`rgba(${BR},${BG},${BB},0.75)`}
                   fontFamily="monospace"
                 >
                   NODE_STATUS: OPTIMAL
@@ -363,7 +368,7 @@ function ArchDiagramContent() {
         className="pointer-events-none absolute inset-x-0 h-[2px]"
         style={{
           background:
-            'linear-gradient(90deg, transparent 0%, rgba(0,229,255,0.18) 30%, rgba(0,229,255,0.28) 50%, rgba(0,229,255,0.18) 70%, transparent 100%)',
+            `linear-gradient(90deg, transparent 0%, rgba(${BR},${BG},${BB},0.18) 30%, rgba(${BR},${BG},${BB},0.28) 50%, rgba(${BR},${BG},${BB},0.18) 70%, transparent 100%)`,
         }}
         animate={{ top: ['8%', '92%', '8%'] }}
         transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
@@ -411,7 +416,7 @@ function MorphedHardware({ progress }: { progress: MotionValue<number> }) {
   const accentBoxShadow = useTransform(chrome, (c) =>
     c < 0.02
       ? 'none'
-      : `inset 0 0 0 1px rgba(0,229,255,${0.18 * c}), 0 0 60px rgba(0,229,255,${0.06 * c})`,
+      : `inset 0 0 0 1px rgba(${BR},${BG},${BB},${0.18 * c}), 0 0 60px rgba(${BR},${BG},${BB},${0.06 * c})`,
   );
   const borderWidthPx = useTransform(chrome, (c) => (c < 0.02 ? '0px' : '1px'));
 

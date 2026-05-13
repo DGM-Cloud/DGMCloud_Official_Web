@@ -34,11 +34,11 @@ const CATEGORY_HOVER: Record<
   { overlay: string; border: string; shadow: string; title: string; label: string }
 > = {
   Frontend: {
-    overlay: 'bg-gradient-to-br from-blue-500/30 via-cyan-500/12 to-transparent',
+    overlay: 'bg-gradient-to-br from-blue-600/28 via-blue-500/12 to-transparent',
     border: 'hover:border-blue-400/45',
-    shadow: 'hover:shadow-[0_0_28px_rgba(59,130,246,0.22)]',
-    title: 'group-hover:text-cyan-200',
-    label: 'group-hover:text-cyan-400/80',
+    shadow: 'hover:shadow-[0_0_28px_rgba(18,48,224,0.22)]',
+    title: 'group-hover:text-blue-200',
+    label: 'group-hover:text-blue-400/80',
   },
   Backend: {
     overlay: 'bg-gradient-to-br from-fuchsia-500/28 via-pink-500/14 to-transparent',
