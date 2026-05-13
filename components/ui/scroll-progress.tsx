@@ -10,7 +10,7 @@ export const ScrollProgressBar = memo(function ScrollProgressBar() {
   const scaleX = useSpring(scrollYProgress, { stiffness: 200, damping: 30, restDelta: 0.001 });
 
   const r = SITE_BRAND_RGB.join(', ');
-  const barGradient = `linear-gradient(90deg, ${SITE_BRAND_HEX} 0%, #4d6ef5 55%, #b4c2ff 100%)`;
+  const barGradient = `linear-gradient(90deg, ${SITE_BRAND_HEX} 0%, #339dff 55%, #b8ddff 100%)`;
 
   if (reduceMotion) return null;
 

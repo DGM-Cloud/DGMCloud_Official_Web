@@ -123,13 +123,13 @@ export interface AuroraProps {
   className?: string;
 }
 
-const DEFAULT_STOPS = ['#060d20', SITE_BRAND_AURORA_HEX, '#0a0818'];
+const DEFAULT_STOPS = ['#051428', SITE_BRAND_AURORA_HEX, '#080a18'];
 
-/** Ramp → navío oscuro → azul haz → borde casi negro. */
+/** Ramp → azul noche → haz marca → casi negro. */
 export const LANDING_AURORA_STOPS: readonly string[] = [
-  '#070f24',
+  '#061a32',
   SITE_BRAND_AURORA_HEX,
-  '#0a0716',
+  '#090816',
 ];
 
 const SITE_BRAND_RADIAL = `rgba(${SITE_BRAND_RGB[0]}, ${SITE_BRAND_RGB[1]}, ${SITE_BRAND_RGB[2]}, 0.085)`;

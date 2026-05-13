@@ -36,7 +36,7 @@ const CATEGORY_HOVER: Record<
   Frontend: {
     overlay: 'bg-gradient-to-br from-blue-600/28 via-blue-500/12 to-transparent',
     border: 'hover:border-blue-400/45',
-    shadow: 'hover:shadow-[0_0_28px_rgba(18,48,224,0.22)]',
+    shadow: 'hover:shadow-[0_0_28px_rgba(0,115,252,0.22)]',
     title: 'group-hover:text-blue-200',
     label: 'group-hover:text-blue-400/80',
   },

@@ -140,14 +140,14 @@ export function PortfolioSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[rgba(14,14,14,0.72)] outline-none ring-offset-background backdrop-blur-md transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-[0_0_48px_rgba(18,48,224,0.12)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
+              className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[rgba(14,14,14,0.72)] outline-none ring-offset-background backdrop-blur-md transition-[border-color,box-shadow] duration-300 hover:border-primary/35 hover:shadow-[0_0_48px_rgba(0,115,252,0.12)] focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#050505]"
             >
               <div
                 className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
                 aria-hidden
                 style={{
                   background:
-                    'radial-gradient(ellipse 90% 55% at 50% 0%, rgba(18,48,224,0.12), transparent 60%)',
+                    'radial-gradient(ellipse 90% 55% at 50% 0%, rgba(0,115,252,0.12), transparent 60%)',
                 }}
               />
 

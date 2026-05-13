@@ -5,26 +5,26 @@
 
 :root {
   /* Tokens de marca — sync con lib/site-brand.ts para el HEX principal */
-  --brand-accent-rgb: 18 48 224;
+  --brand-accent-rgb: 0 115 252;
   --background: #050505;
   --foreground: #ffffff;
   --card: #121212;
   --card-foreground: #ffffff;
   --popover: #121212;
   --popover-foreground: #ffffff;
-  --primary: #1230e0;
+  --primary: #0073fc;
   --primary-foreground: #050505;
   --secondary: #27272a;
   --secondary-foreground: #ffffff;
   --muted: #27272a;
   --muted-foreground: #94a3b8;
-  --accent: #1230e0;
+  --accent: #0073fc;
   --accent-foreground: #050505;
   --destructive: #ff3b30;
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.08);
   --input: #18181b;
-  --ring: #1230e0;
+  --ring: #0073fc;
   --radius: 0.625rem;
   --grain-opacity: 0.015;
 }
@@ -36,19 +36,19 @@
   --card-foreground: #ffffff;
   --popover: #121212;
   --popover-foreground: #ffffff;
-  --primary: #1230e0;
+  --primary: #0073fc;
   --primary-foreground: #050505;
   --secondary: #27272a;
   --secondary-foreground: #ffffff;
   --muted: #27272a;
   --muted-foreground: #94a3b8;
-  --accent: #1230e0;
+  --accent: #0073fc;
   --accent-foreground: #050505;
   --destructive: #ff3b30;
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.08);
   --input: #18181b;
-  --ring: #1230e0;
+  --ring: #0073fc;
 }
 
 @theme inline {
@@ -111,14 +111,14 @@
   .cloud-iridescent {
     background: conic-gradient(
       from var(--irid-angle, 0deg),
-      #1230e0 0%,
+      #0073fc 0%,
       #ffffff 18%,
-      #0d26b8 32%,
-      #8fa4ff 48%,
-      #1230e0 60%,
+      #005ebd 32%,
+      #7ec0ff 48%,
+      #0073fc 60%,
       #ffffff 75%,
-      #5b7cff 88%,
-      #1230e0 100%
+      #4da6ff 88%,
+      #0073fc 100%
     );
     -webkit-background-clip: text;
     background-clip: text;
@@ -139,7 +139,7 @@
   @media (prefers-reduced-motion: reduce) {
     .cloud-iridescent {
       animation: none;
-      background: linear-gradient(135deg, #1230e0, #8fa4ff);
+      background: linear-gradient(135deg, #0073fc, #7ec0ff);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -240,7 +240,7 @@
   }
 
   .gradient-text {
-    background: linear-gradient(135deg, #1230e0 0%, #6b86ff 100%);
+    background: linear-gradient(135deg, #0073fc 0%, #52a9ff 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
