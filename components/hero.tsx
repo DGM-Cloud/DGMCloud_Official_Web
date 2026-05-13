@@ -1,9 +1,22 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import BlurText from '@/components/blur-text';
 import { useTranslations } from '@/lib/i18n/locale-context';
+
+/** En móvil el scroll-linked opacity/translate del hero fuerza recomposición sobre el WebGL fijo y parpadea al abandonar el fold. */
+function useMobileHeroViewport() {
+  const [narrow, setNarrow] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)');
+    const sync = () => setNarrow(mq.matches);
+    sync();
+    mq.addEventListener('change', sync);
+    return () => mq.removeEventListener('change', sync);
+  }, []);
+  return narrow;
+}
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -18,12 +31,13 @@ export function Hero() {
   const { t } = useTranslations();
   const sectionRef = useRef<HTMLElement>(null);
   const reduceMotion = useReducedMotion();
+  const narrowMobile = useMobileHeroViewport();
 
-  /* Parallax: hero content fades + shrinks as user scrolls down */
+  /* Parallax: hero fades + shrink al hacer scroll — desactivado en móvil (ver hook). */
   const { scrollYProgress } = useScroll({ target: sectionRef, offset: ['start start', 'end start'] });
-  const heroOpacity  = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
-  const heroY        = useTransform(scrollYProgress, [0, 0.55], ['0%', '-8%']);
-  const heroScale    = useTransform(scrollYProgress, [0, 0.55], [1, 0.96]);
+  const heroOpacity = useTransform(scrollYProgress, [0, 0.55], [1, 0]);
+  const heroY = useTransform(scrollYProgress, [0, 0.55], ['0%', '-8%']);
+  const heroScale = useTransform(scrollYProgress, [0, 0.55], [1, 0.96]);
 
   return (
     <section
@@ -37,7 +51,7 @@ export function Hero() {
         initial="hidden"
         animate="visible"
         style={
-          reduceMotion
+          reduceMotion || narrowMobile
             ? undefined
             : { opacity: heroOpacity, y: heroY, scale: heroScale }
         }
