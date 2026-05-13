@@ -98,9 +98,13 @@ export function Hero() {
             whileTap={{ scale: 0.97 }}
             transition={{ type: 'spring', stiffness: 420, damping: 18 }}
           >
-            <button className="btn-shimmer relative z-10 inline-flex items-center gap-2.5 bg-primary px-8 py-3.5 text-sm font-semibold tracking-wide text-primary-foreground">
+            <motion.a
+              href="#contact"
+              className="btn-shimmer relative z-10 inline-flex items-center gap-2.5 bg-primary px-8 py-3.5 text-sm font-semibold tracking-wide text-primary-foreground"
+              style={{ borderRadius: '6px' }}
+            >
               {t('hero.ctaPrimary')} <span>→</span>
-            </button>
+            </motion.a>
             {/* Radial light burst on hover */}
             <motion.div
               aria-hidden

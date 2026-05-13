@@ -152,10 +152,15 @@ function AuroraInner(props: AuroraProps) {
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+    const narrowViewport =
+      typeof window !== 'undefined' &&
+      window.matchMedia('(max-width: 767px)').matches;
+
     const renderer = new Renderer({
       alpha: true,
       premultipliedAlpha: true,
-      antialias: true,
+      antialias: !narrowViewport,
+      powerPreference: narrowViewport ? 'low-power' : 'high-performance',
     });
     const gl = renderer.gl;
     gl.clearColor(0, 0, 0, 0);
@@ -164,13 +169,33 @@ function AuroraInner(props: AuroraProps) {
 
     const canvas = gl.canvas as HTMLCanvasElement;
     canvas.style.cssText =
-      'position:absolute;inset:0;display:block;width:100%;height:100%;background-color:transparent';
+      'position:absolute;inset:0;display:block;width:100%;height:100%;background-color:transparent;' +
+      'transform:translateZ(0);-webkit-backface-visibility:hidden;backface-visibility:hidden';
 
     let program: InstanceType<typeof Program> | undefined;
 
+    let lastAppliedW = 0;
+    let lastAppliedH = 0;
+
+    /** En móvil la barra de URL cambia altura/visual viewport sin que el contenido cambie realmente → WebGL resize en bucle causa parpadeo. Solo aplicamos tamaño estable. */
     const resize = () => {
       const width = Math.max(1, ctn.offsetWidth);
       const height = Math.max(1, ctn.offsetHeight);
+
+      const wSame = Math.abs(width - lastAppliedW) < 1;
+      const hDiff = Math.abs(height - lastAppliedH);
+      if (
+        lastAppliedW > 0 &&
+        wSame &&
+        hDiff > 0 &&
+        hDiff < 112
+      ) {
+        return;
+      }
+
+      lastAppliedW = width;
+      lastAppliedH = height;
+
       renderer.setSize(width, height);
       if (program) {
         program.uniforms.uResolution.value = [width, height];
@@ -262,7 +287,8 @@ export function Aurora(props: AuroraProps) {
 export const AuroraBackground = memo(function AuroraBackground() {
   return (
     <div
-      className="pointer-events-none fixed inset-0 z-0 min-h-[100dvh] w-full isolate"
+      className="pointer-events-none fixed inset-0 z-0 min-h-[100lvh] w-full isolate"
+      style={{ WebkitTransform: 'translateZ(0)' }}
       aria-hidden
     >
       {/* Base Midnight + halos muy suaves (cyan / toque fucsia) antes del shader */}
@@ -277,13 +303,13 @@ export const AuroraBackground = memo(function AuroraBackground() {
         }}
       />
 
-      <div className="absolute inset-0 min-h-[100dvh]">
+      <div className="absolute inset-0 min-h-[100lvh]">
         <AuroraInner
           colorStops={LANDING_AURORA_STOPS}
           blend={0.52}
           amplitude={0.92}
           speed={2.4}
-          className="absolute inset-0 h-full min-h-[100dvh] w-full"
+          className="absolute inset-0 h-full min-h-[100lvh] w-full"
         />
       </div>
 
